@@ -666,6 +666,250 @@
     }
 
     /* ─────────────────────────────────────────────
+       DRESS CODE BUTTON (below details grid)
+    ───────────────────────────────────────────── */
+    .dresscode-trigger-wrap {
+      width: 100%;
+      max-width: 480px;
+      display: flex;
+      justify-content: flex-start;
+      margin-top: 2.5rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--border);
+      opacity: 0;
+    }
+
+    .btn-dresscode {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.75rem 1.5rem;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-mid);
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      font-size: 0.65rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: border-color 0.3s ease, color 0.3s ease;
+    }
+
+    .btn-dresscode:hover,
+    .btn-dresscode:focus-visible {
+      border-color: var(--text-mid);
+      color: var(--text-hi);
+      outline: none;
+    }
+
+    .btn-dresscode svg { flex-shrink: 0; }
+
+    /* ─────────────────────────────────────────────
+       DRESS CODE — BOTTOM SHEET
+    ───────────────────────────────────────────── */
+
+    /* Full-screen overlay with blur */
+    #dresscode-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      z-index: 500;
+      opacity: 0;
+      pointer-events: none;
+      /* no display:none — we animate opacity so keep in DOM */
+    }
+
+    /* Sheet panel */
+    #dresscode-sheet {
+      position: fixed;
+      inset: 0;
+      margin: auto;
+      width: min(480px, 92vw);
+      max-height: min(80dvh, 680px);
+      height: fit-content;
+      background: #111111;
+      border: 1px solid #2a2a2a;
+      border-radius: 6px;
+      z-index: 501;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
+      /* hidden by default — GSAP controls visibility */
+      visibility: hidden;
+      opacity: 0;
+      will-change: transform, opacity;
+      padding-bottom: 0.5rem;
+    }
+
+    /* Custom scrollbar inside sheet */
+    #dresscode-sheet::-webkit-scrollbar { width: 4px; }
+    #dresscode-sheet::-webkit-scrollbar-track { background: transparent; }
+    #dresscode-sheet::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 2px; }
+
+    /* Drag handle — hide for centered modal */
+    .sheet-handle { display: none; }
+
+    /* Sheet header row */
+    .sheet-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.6rem 1.75rem 0;
+    }
+
+    .sheet-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(1.5rem, 6vw, 2rem);
+      color: var(--text-hi);
+      letter-spacing: 0.02em;
+    }
+
+    /* Close (X) button */
+    .sheet-close {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      cursor: pointer;
+      color: var(--text-mid);
+      transition: border-color 0.25s ease, color 0.25s ease;
+      flex-shrink: 0;
+    }
+
+    .sheet-close:hover,
+    .sheet-close:focus-visible {
+      border-color: var(--text-mid);
+      color: var(--text-hi);
+      outline: none;
+    }
+
+    /* Sheet eyebrow rule */
+    .sheet-rule {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--red), transparent);
+      margin: 1.2rem 1.75rem 0;
+      opacity: 0.6;
+    }
+
+    /* Sheet body */
+    .sheet-body {
+      padding: 0 1.75rem 2.5rem;
+    }
+
+    /* Intro note */
+    .sheet-note {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 200;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      color: var(--text-mid);
+      line-height: 1.85;
+      margin-bottom: 2rem;
+    }
+
+    /* Dress code category block */
+    .dc-block {
+      margin-bottom: 1.75rem;
+      padding-bottom: 1.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .dc-block:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .dc-category {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 200;
+      font-size: 0.58rem;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.6rem;
+    }
+
+    .dc-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(1.25rem, 4.5vw, 1.6rem);
+      color: var(--text-hi);
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+
+    .dc-items {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .dc-items li {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 200;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      color: var(--text-mid);
+      display: flex;
+      align-items: baseline;
+      gap: 0.6rem;
+    }
+
+    .dc-items li::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--red);
+      flex-shrink: 0;
+      margin-top: 0.1em;
+    }
+
+    /* Notice chip */
+    .dc-notice {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1.6rem;
+      padding: 0.65rem 1rem;
+      border: 1px solid #2a2a2a;
+      background: #0d0d0d;
+    }
+
+    .dc-notice span {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 200;
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-lo);
+    }
+
+    @media (min-width: 640px) {
+      #dresscode-sheet {
+        width: min(520px, 88vw);
+      }
+
+      .dresscode-trigger-wrap { max-width: 520px; }
+    }
+
+    @media (min-width: 1024px) {
+      .dresscode-trigger-wrap { max-width: 760px; }
+    }
+
+    /* ─────────────────────────────────────────────
        UTILITIES
     ───────────────────────────────────────────── */
     ::selection {
@@ -792,6 +1036,22 @@
         </div>
 
       </div>
+      <!-- Dress Code trigger (below grid, full-width row) -->
+      <div class="dresscode-trigger-wrap" id="dresscode-trigger-wrap">
+        <button
+          class="btn-dresscode"
+          id="btn-dresscode"
+          aria-haspopup="dialog"
+          aria-controls="dresscode-sheet"
+          aria-expanded="false"
+        >
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.57a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.57a2 2 0 0 0-1.34-2.23z"/>
+          </svg>
+          Dress Code
+        </button>
+      </div>
+
     </section>
 
     <!-- ── RSVP ── -->
@@ -825,6 +1085,84 @@
 
   </main>
 
+
+  <!-- ══════════════════════════════════════
+       DRESS CODE BOTTOM SHEET
+  ═══════════════════════════════════════ -->
+  <div id="dresscode-overlay" role="presentation" aria-hidden="true"></div>
+
+  <div
+    id="dresscode-sheet"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="sheet-title"
+    tabindex="-1"
+  >
+    <div class="sheet-handle" aria-hidden="true"></div>
+
+    <div class="sheet-header">
+      <h2 class="sheet-title" id="sheet-title">Dress Code</h2>
+      <button class="sheet-close" id="sheet-close" aria-label="Close dress code">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="sheet-rule" aria-hidden="true"></div>
+
+    <div class="sheet-body">
+
+      <p class="sheet-note">
+        This is a formal black-tie event.<br/>
+        We kindly ask all guests to honour the dress code<br/>
+        to maintain the elegance of the evening.
+      </p>
+
+      <div class="dc-block">
+        <p class="dc-category">Gentlemen</p>
+        <p class="dc-title">Black Tie</p>
+        <ul class="dc-items">
+          <li>Black or midnight-blue tuxedo</li>
+          <li>White dress shirt with black bow tie</li>
+          <li>Dark formal trousers &amp; patent leather shoes</li>
+          <li>Optional: pocket square in white or ivory</li>
+        </ul>
+      </div>
+
+      <div class="dc-block">
+        <p class="dc-category">Ladies</p>
+        <p class="dc-title">Formal Evening Wear</p>
+        <ul class="dc-items">
+          <li>Full-length evening gown or elegant cocktail dress</li>
+          <li>Heels, elegant flats, or formal sandals</li>
+          <li>Clutch or small formal bag</li>
+          <li>Statement jewellery welcome</li>
+        </ul>
+      </div>
+
+      <div class="dc-block">
+        <p class="dc-category">Colour Palette</p>
+        <p class="dc-title">Refined &amp; Dark Tones</p>
+        <ul class="dc-items">
+          <li>Black, charcoal, midnight blue, deep burgundy</li>
+          <li>Ivory &amp; champagne for ladies</li>
+          <li>Avoid: bright casual colours, sportswear, denim</li>
+        </ul>
+      </div>
+
+      <div class="dc-notice">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--text-lo)" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="8" x2="12" y2="12"/>
+          <line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
+        <span>Guests not meeting the dress code may be kindly redirected</span>
+      </div>
+
+    </div>
+  </div>
 
   <!-- ══════════════════════════════════════
        SCRIPTS
@@ -1043,6 +1381,79 @@
         { opacity: 0 },
         { opacity: 1, duration: 0.8, ease: 'power2.out' }
       );
+
+      revealOnScroll(
+        '.dresscode-trigger-wrap',
+        { opacity: 0, y: 16 },
+        { opacity: 1, y: 0, duration: 0.75, ease: 'power3.out' }
+      );
+
+      initDressCode();
+    }
+
+    /* ── 4. Dress Code bottom sheet ── */
+    function initDressCode() {
+      const overlay   = document.getElementById('dresscode-overlay');
+      const sheet     = document.getElementById('dresscode-sheet');
+      const btnOpen   = document.getElementById('btn-dresscode');
+      const btnClose  = document.getElementById('sheet-close');
+
+      let isOpen = false;
+      let openTl = null;
+
+      const openSheet = () => {
+        if (isOpen) return;
+        isOpen = true;
+        btnOpen.setAttribute('aria-expanded', 'true');
+        overlay.style.pointerEvents = 'auto';
+        sheet.removeAttribute('aria-hidden');
+        sheet.style.visibility = 'visible';
+
+        if (openTl) openTl.kill();
+        openTl = gsap.timeline();
+        openTl
+          .fromTo(overlay,
+            { opacity: 0 },
+            { opacity: 1, duration: 0.35, ease: 'power2.out' }, 0)
+          .fromTo(sheet,
+            { opacity: 0, y: 40 },
+            { opacity: 1, y: 0, duration: 0.48, ease: 'power3.out' }, 0.05);
+
+        sheet.focus({ preventScroll: true });
+      };
+
+      const closeSheet = () => {
+        if (!isOpen) return;
+        isOpen = false;
+        btnOpen.setAttribute('aria-expanded', 'false');
+
+        if (openTl) openTl.kill();
+        openTl = gsap.timeline({
+          onComplete: () => {
+            overlay.style.pointerEvents = 'none';
+            sheet.setAttribute('aria-hidden', 'true');
+            sheet.style.visibility = 'hidden';
+            btnOpen.focus();
+          }
+        });
+        openTl
+          .to(sheet,   { opacity: 0, y: 24, duration: 0.3, ease: 'power2.in' }, 0)
+          .to(overlay, { opacity: 0, duration: 0.3, ease: 'power2.in' }, 0.05);
+      };
+
+      btnOpen.addEventListener('click', openSheet);
+      btnClose.addEventListener('click', closeSheet);
+
+      /* Dismiss on overlay click */
+      overlay.addEventListener('click', closeSheet);
+
+      /* Dismiss on Escape */
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && isOpen) closeSheet();
+      });
+
+      /* Prevent sheet scroll from closing */
+      sheet.addEventListener('click', (e) => e.stopPropagation());
     }
   </script>
 
