@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>18th Gala — An Invitation</title>
+  <title>День рождения Руми — Приглашение</title>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Raleway:wght@200;300;400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Playfair+Display:ital,wght@0,300;0,400;1,300&family=Raleway:wght@200;300;400;600&display=swap" rel="stylesheet" />
 
   <!-- GSAP CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
@@ -25,18 +25,18 @@
     }
 
     :root {
-      --bg:        #0a0a0a;
-      --surface:   #111111;
-      --surface2:  #181818;
-      --border:    #2a2a2a;
-      --text-hi:   #f0f0f0;
-      --text-mid:  #9a9a9a;
-      --text-lo:   #555555;
-      --red:       #e60000;
-      --red-muted: rgba(230, 0, 0, 0.15);
-      --env-body:  #161616;
-      --env-flap:  #1c1c1c;
-      --env-inner: #0e0e0e;
+      --bg:        #F9F9F9;
+      --surface:   #F2EDE5;
+      --surface2:  #EDE6DC;
+      --border:    rgba(0, 0, 0, 0.1);
+      --text-hi:   #2D2D2D;
+      --text-mid:  #6B6260;
+      --text-lo:   #A09895;
+      --red:       #800020;
+      --red-muted: rgba(128, 0, 32, 0.12);
+      --env-body:  #EDE6DC;
+      --env-flap:  #E4DAD0;
+      --env-inner: #F5F0EA;
     }
 
     html {
@@ -50,7 +50,7 @@
     body {
       min-height: 100dvh;
       overflow-x: hidden;
-      font-family: 'Raleway', sans-serif;
+      font-family: 'Playfair Display', 'Cormorant Garamond', serif;
       font-weight: 300;
     }
 
@@ -61,7 +61,7 @@
       content: '';
       position: fixed;
       inset: 0;
-      opacity: 0.03;
+      opacity: 0.025;
       pointer-events: none;
       z-index: 9999;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4'/%3E%3C/filter%3E%3Crect width='512' height='512' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
@@ -86,12 +86,12 @@
     }
 
     .scene-label {
-      font-family: 'Raleway', sans-serif;
-      font-weight: 200;
+      font-family: 'Playfair Display', serif;
+      font-weight: 300;
       font-size: 0.7rem;
       letter-spacing: 0.35em;
       text-transform: uppercase;
-      color: var(--text-lo);
+      color: var(--text-hi);
       opacity: 0;
     }
 
@@ -125,9 +125,10 @@
       position: absolute;
       inset: 0;
       background: var(--env-body);
-      border: 1px solid var(--border);
+      border: 1px solid rgba(0,0,0,0.12);
       border-radius: 3px;
       overflow: hidden;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.06);
     }
 
     /* Inner bottom fold (decorative triangle) */
@@ -152,7 +153,7 @@
       border-top: calc(min(240px, 62vw) / 2) solid transparent;
       border-bottom: calc(min(240px, 62vw) / 2) solid transparent;
       border-left: calc(min(340px, 88vw) * 0.42) solid var(--env-flap);
-      opacity: 0.6;
+      opacity: 0.75;
     }
 
     /* Right side fold */
@@ -163,7 +164,7 @@
       border-top: calc(min(240px, 62vw) / 2) solid transparent;
       border-bottom: calc(min(240px, 62vw) / 2) solid transparent;
       border-right: calc(min(340px, 88vw) * 0.42) solid var(--env-flap);
-      opacity: 0.6;
+      opacity: 0.75;
     }
 
     /* ── TOP FLAP ── */
@@ -174,7 +175,7 @@
       right: -1px;
       height: 52%;
       background: var(--env-flap);
-      border: 1px solid var(--border);
+      border: 1px solid rgba(0,0,0,0.1);
       border-bottom: none;
       clip-path: polygon(0 0, 100% 0, 50% 100%);
       transform-origin: top center;
@@ -188,7 +189,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(160deg, rgba(255,255,255,0.04) 0%, transparent 60%);
+      background: linear-gradient(160deg, rgba(255,255,255,0.35) 0%, transparent 60%);
       clip-path: polygon(0 0, 100% 0, 50% 100%);
     }
 
@@ -206,7 +207,7 @@
       align-items: center;
       justify-content: center;
       z-index: 10;
-      box-shadow: 0 0 28px rgba(230, 0, 0, 0.35), 0 0 60px rgba(230, 0, 0, 0.1);
+      box-shadow: 0 0 22px rgba(128, 0, 32, 0.30), 0 0 50px rgba(128, 0, 32, 0.12);
     }
 
     .wax-seal::before {
@@ -235,8 +236,8 @@
       transform: translateX(-50%);
       width: calc(min(340px, 88vw) * 0.84);
       height: calc(min(240px, 62vw) * 0.80);
-      background: #0d0d0d;
-      border: 1px solid #222;
+      background: #FAF7F2;
+      border: 1px solid rgba(0,0,0,0.1);
       border-radius: 2px;
       display: flex;
       align-items: center;
@@ -244,6 +245,7 @@
       z-index: 20;
       opacity: 0;
       pointer-events: none;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.07);
     }
 
     .letter-card-inner {
@@ -261,12 +263,12 @@
 
     /* ── Hint text ── */
     .open-hint {
-      font-family: 'Raleway', sans-serif;
-      font-weight: 200;
+      font-family: 'Playfair Display', serif;
+      font-weight: 300;
       font-size: 0.68rem;
       letter-spacing: 0.4em;
       text-transform: uppercase;
-      color: var(--text-lo);
+      color: var(--text-mid);
       opacity: 0;
     }
 
@@ -353,8 +355,8 @@
     }
 
     .section-tag {
-      font-family: 'Raleway', sans-serif;
-      font-weight: 200;
+      font-family: 'Playfair Display', serif;
+      font-weight: 300;
       font-size: 0.63rem;
       letter-spacing: 0.45em;
       text-transform: uppercase;
@@ -369,8 +371,8 @@
     }
 
     .hero-eyebrow {
-      font-family: 'Raleway', sans-serif;
-      font-weight: 200;
+      font-family: 'Playfair Display', serif;
+      font-weight: 300;
       font-size: 0.65rem;
       letter-spacing: 0.5em;
       text-transform: uppercase;
@@ -396,7 +398,7 @@
       display: block;
       font-size: 0.62em;
       letter-spacing: 0.06em;
-      color: #818181;
+      color: #A09490;
     }
 
     /* decorative corner marks */
@@ -406,14 +408,14 @@
       height: 20px;
       opacity: 0.25;
     }
-    .corner--tl { top: 3rem; left: 1.75rem; border-top: 1px solid var(--text-hi); border-left: 1px solid var(--text-hi); }
-    .corner--tr { top: 3rem; right: 1.75rem; border-top: 1px solid var(--text-hi); border-right: 1px solid var(--text-hi); }
-    .corner--bl { bottom: 3rem; left: 1.75rem; border-bottom: 1px solid var(--text-hi); border-left: 1px solid var(--text-hi); }
-    .corner--br { bottom: 3rem; right: 1.75rem; border-bottom: 1px solid var(--text-hi); border-right: 1px solid var(--text-hi); }
+    .corner--tl { top: 3rem; left: 1.75rem; border-top: 1px solid var(--text-lo); border-left: 1px solid var(--text-lo); }
+    .corner--tr { top: 3rem; right: 1.75rem; border-top: 1px solid var(--text-lo); border-right: 1px solid var(--text-lo); }
+    .corner--bl { bottom: 3rem; left: 1.75rem; border-bottom: 1px solid var(--text-lo); border-left: 1px solid var(--text-lo); }
+    .corner--br { bottom: 3rem; right: 1.75rem; border-bottom: 1px solid var(--text-lo); border-right: 1px solid var(--text-lo); }
 
     .hero-host {
-      font-family: 'Raleway', sans-serif;
-      font-weight: 200;
+      font-family: 'Playfair Display', serif;
+      font-weight: 300;
       font-size: 0.75rem;
       letter-spacing: 0.25em;
       color: var(--text-mid);
@@ -471,8 +473,8 @@
     }
 
     .detail-label {
-      font-family: 'Raleway', sans-serif;
-      font-weight: 200;
+      font-family: 'Playfair Display', serif;
+      font-weight: 300;
       font-size: 0.58rem;
       letter-spacing: 0.5em;
       text-transform: uppercase;
@@ -488,8 +490,8 @@
     }
 
     .detail-sub {
-      font-family: 'Raleway', sans-serif;
-      font-weight: 200;
+      font-family: 'Playfair Display', serif;
+      font-weight: 300;
       font-size: 0.72rem;
       letter-spacing: 0.12em;
       color: var(--text-mid);
@@ -506,7 +508,7 @@
       background: transparent;
       border: 1px solid var(--red);
       color: var(--red);
-      font-family: 'Raleway', sans-serif;
+      font-family: 'Playfair Display', serif;
       font-weight: 300;
       font-size: 0.65rem;
       letter-spacing: 0.35em;
@@ -553,8 +555,8 @@
     }
 
     .rsvp-body {
-      font-family: 'Raleway', sans-serif;
-      font-weight: 200;
+      font-family: 'Playfair Display', serif;
+      font-weight: 300;
       font-size: 0.8rem;
       letter-spacing: 0.12em;
       color: var(--text-mid);
@@ -572,8 +574,8 @@
       padding: 1rem 2.4rem;
       background: var(--red);
       color: #fff;
-      font-family: 'Raleway', sans-serif;
-      font-weight: 600;
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
       font-size: 0.68rem;
       letter-spacing: 0.45em;
       text-transform: uppercase;
@@ -616,8 +618,8 @@
 
     .rsvp-footer {
       margin-top: 3rem;
-      font-family: 'Raleway', sans-serif;
-      font-weight: 200;
+      font-family: 'Playfair Display', serif;
+      font-weight: 300;
       font-size: 0.6rem;
       letter-spacing: 0.3em;
       text-transform: uppercase;
@@ -685,9 +687,9 @@
       gap: 0.65rem;
       padding: 0.75rem 1.5rem;
       background: transparent;
-      border: 1px solid var(--border);
+      border: 1px solid rgba(0,0,0,0.18);
       color: var(--text-mid);
-      font-family: 'Raleway', sans-serif;
+      font-family: 'Playfair Display', serif;
       font-weight: 300;
       font-size: 0.65rem;
       letter-spacing: 0.35em;
@@ -713,7 +715,7 @@
     #dresscode-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.55);
+      background: rgba(200, 190, 182, 0.45);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       z-index: 500;
@@ -722,7 +724,7 @@
       /* no display:none — we animate opacity so keep in DOM */
     }
 
-    /* Sheet panel */
+    /* Sheet panel — glassmorphism */
     #dresscode-sheet {
       position: fixed;
       inset: 0;
@@ -730,9 +732,12 @@
       width: min(480px, 92vw);
       max-height: min(80dvh, 680px);
       height: fit-content;
-      background: #111111;
-      border: 1px solid #2a2a2a;
-      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.12), 0 4px 16px rgba(0,0,0,0.06);
       z-index: 501;
       overflow-y: auto;
       overscroll-behavior: contain;
@@ -747,7 +752,7 @@
     /* Custom scrollbar inside sheet */
     #dresscode-sheet::-webkit-scrollbar { width: 4px; }
     #dresscode-sheet::-webkit-scrollbar-track { background: transparent; }
-    #dresscode-sheet::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 2px; }
+    #dresscode-sheet::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 2px; }
 
     /* Drag handle — hide for centered modal */
     .sheet-handle { display: none; }
@@ -766,6 +771,11 @@
       font-size: clamp(1.5rem, 6vw, 2rem);
       color: var(--text-hi);
       letter-spacing: 0.02em;
+    }
+
+    /* Sheet close button adjusted for light theme */
+    .sheet-close {
+      border-color: rgba(0,0,0,0.15);
     }
 
     /* Close (X) button */
@@ -807,8 +817,8 @@
 
     /* Intro note */
     .sheet-note {
-      font-family: 'Raleway', sans-serif;
-      font-weight: 200;
+      font-family: 'Playfair Display', serif;
+      font-weight: 300;
       font-size: 0.72rem;
       letter-spacing: 0.14em;
       color: var(--text-mid);
@@ -830,8 +840,8 @@
     }
 
     .dc-category {
-      font-family: 'Raleway', sans-serif;
-      font-weight: 200;
+      font-family: 'Playfair Display', serif;
+      font-weight: 300;
       font-size: 0.58rem;
       letter-spacing: 0.5em;
       text-transform: uppercase;
@@ -856,8 +866,8 @@
     }
 
     .dc-items li {
-      font-family: 'Raleway', sans-serif;
-      font-weight: 200;
+      font-family: 'Playfair Display', serif;
+      font-weight: 300;
       font-size: 0.75rem;
       letter-spacing: 0.1em;
       color: var(--text-mid);
@@ -884,13 +894,14 @@
       gap: 0.5rem;
       margin-top: 1.6rem;
       padding: 0.65rem 1rem;
-      border: 1px solid #2a2a2a;
-      background: #0d0d0d;
+      border: 1px solid rgba(0,0,0,0.1);
+      background: rgba(128, 0, 32, 0.05);
+      border-radius: 2px;
     }
 
     .dc-notice span {
-      font-family: 'Raleway', sans-serif;
-      font-weight: 200;
+      font-family: 'Playfair Display', serif;
+      font-weight: 300;
       font-size: 0.62rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
@@ -917,6 +928,85 @@
       color: #fff;
     }
 
+    /* Subtle warm shadow on invitation sections for light theme depth */
+    .section-details {
+      box-shadow: inset 0 1px 0 rgba(0,0,0,0.06);
+    }
+
+    /* ─────────────────────────────────────────────
+       GUEST LIST SECTION
+    ───────────────────────────────────────────── */
+    .section-guests {
+      background: var(--surface);
+      text-align: center;
+      gap: 0;
+    }
+
+    .section-guests::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+
+    .guests-grid {
+      width: 100%;
+      max-width: 400px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+
+    .guest-item {
+      display: flex;
+      align-items: baseline;
+      gap: 0.85rem;
+      padding: 1rem 0.5rem;
+      border-bottom: 1px solid var(--border);
+      opacity: 0;
+    }
+
+    /* remove bottom border from last two items */
+    .guest-item:nth-last-child(-n+2) {
+      border-bottom: none;
+    }
+
+    /* subtle right separator between columns */
+    .guest-item:nth-child(odd) {
+      border-right: 1px solid var(--border);
+      padding-right: 1.5rem;
+      justify-content: flex-end;
+    }
+
+    .guest-item:nth-child(even) {
+      padding-left: 1.5rem;
+    }
+
+    .guest-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      color: var(--red);
+      flex-shrink: 0;
+    }
+
+    .guest-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(1.05rem, 3.5vw, 1.3rem);
+      color: var(--text-hi);
+      letter-spacing: 0.04em;
+    }
+
+    @media (min-width: 560px) {
+      .guests-grid { max-width: 460px; }
+      .guest-item { padding: 1.1rem 0.5rem; }
+      .guest-item:nth-child(odd)  { padding-right: 2rem; }
+      .guest-item:nth-child(even) { padding-left: 2rem; }
+    }
+
     :focus-visible {
       outline: 1px solid var(--red);
       outline-offset: 3px;
@@ -931,7 +1021,7 @@
   ═══════════════════════════════════════ -->
   <div id="scene" role="presentation" aria-label="Tap to open your invitation">
 
-    <p class="scene-label">You are cordially invited</p>
+    <p class="scene-label">Вы были приглашены</p>
 
     <div id="envelope-wrapper">
       <div id="envelope" role="button" tabindex="0" aria-label="Open envelope">
@@ -947,7 +1037,7 @@
 
         <!-- Wax seal -->
         <div class="wax-seal" aria-hidden="true">
-          <span>18</span>
+          <span>R</span>
         </div>
 
       </div>
@@ -959,7 +1049,7 @@
         </div>
       </div>
 
-      <p class="open-hint"><span>Tap to open</span></p>
+      <p class="open-hint"><span>Нажмите, чтобы открыть</span></p>
     </div>
   </div>
 
@@ -982,15 +1072,15 @@
       <div class="corner corner--bl" aria-hidden="true"></div>
       <div class="corner corner--br" aria-hidden="true"></div>
 
-      <p class="hero-eyebrow">A night to remember</p>
+      <p class="hero-eyebrow">Особенный вечер</p>
 
       <h1 class="hero-title">
-        18th
+        Руми
         <em>Gala</em>
       </h1>
 
       <p class="hero-host">
-        In honour of <strong>Rumi's</strong> eighteenth year
+        В честь дня рождения <strong>Руми</strong>
       </p>
 
       <div class="hero-divider"></div>
@@ -998,40 +1088,39 @@
 
     <!-- ── DETAILS ── -->
     <section class="section section-details">
-      <p class="section-tag">The Evening</p>
+      <p class="section-tag">Детали вечера</p>
 
       <div class="details-grid">
 
         <div class="detail-item">
-          <span class="detail-label">Date</span>
-          <span class="detail-value">Saturday<br/>18 April 2026</span>
-          <span class="detail-sub">Doors open at 19:30</span>
+          <span class="detail-label">Дата</span>
+          <span class="detail-value">Понедельник<br/>9 марта 2026</span>
+          <span class="detail-sub">Сбор гостей в 17:00</span>
         </div>
 
         <div class="detail-item">
-          <span class="detail-label">Time</span>
-          <span class="detail-value">20 : 00</span>
-          <span class="detail-sub">Formal attire · Black tie preferred</span>
+          <span class="detail-label">Время</span>
+          <span class="detail-value">17 : 30</span>
+          <span class="detail-sub">Праздничный дресс-код</span>
         </div>
 
         <div class="detail-item">
-          <span class="detail-label">Location</span>
-          <span class="detail-value">The Grand<br/>Hall</span>
-          <span class="detail-sub">123 Elegance Avenue, City</span>
+          <span class="detail-label">Место</span>
+          <span class="detail-value">Grammy</span>
+          <span class="detail-sub">г. Семей</span>
 
-          <!-- ↓ Replace href with your actual Google Maps link -->
           <a
             class="btn-map"
-            href="https://maps.google.com/?q=123+Elegance+Avenue"
+            href="https://2gis.kz/semey/geo/70000001102749213"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Open location in Google Maps"
+            aria-label="Открыть на карте"
           >
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/>
               <circle cx="12" cy="10" r="3"/>
             </svg>
-            View on Maps
+            На карте
           </a>
         </div>
 
@@ -1048,39 +1137,58 @@
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.57a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.57a2 2 0 0 0-1.34-2.23z"/>
           </svg>
-          Dress Code
+          Дресс-код
         </button>
       </div>
 
     </section>
 
+    <!-- ── GUESTS ── -->
+    <section class="section section-guests">
+      <div class="section-rule" aria-hidden="true"></div>
+      <p class="section-tag">Список гостей</p>
+
+      <div class="guests-grid">
+        <div class="guest-item"><span class="guest-num">01</span><span class="guest-name">Аружан</span></div>
+        <div class="guest-item"><span class="guest-num">02</span><span class="guest-name">Нурай</span></div>
+        <div class="guest-item"><span class="guest-num">03</span><span class="guest-name">Ерасыл</span></div>
+        <div class="guest-item"><span class="guest-num">04</span><span class="guest-name">Амина</span></div>
+        <div class="guest-item"><span class="guest-num">05</span><span class="guest-name">Мирас</span></div>
+        <div class="guest-item"><span class="guest-num">06</span><span class="guest-name">Камила</span></div>
+        <div class="guest-item"><span class="guest-num">07</span><span class="guest-name">Сабина</span></div>
+        <div class="guest-item"><span class="guest-num">08</span><span class="guest-name">Ануар</span></div>
+        <div class="guest-item"><span class="guest-num">09</span><span class="guest-name">Жаннур</span></div>
+        <div class="guest-item"><span class="guest-num">10</span><span class="guest-name">Балым</span></div>
+      </div>
+    </section>
+
     <!-- ── RSVP ── -->
     <section class="section section-rsvp">
       <div class="section-rule" aria-hidden="true"></div>
-      <p class="section-tag">Reserve Your Seat</p>
+      <p class="section-tag">Подтверждение</p>
 
-      <h2 class="rsvp-title">Will you<br/>be joining us?</h2>
+      <h2 class="rsvp-title">Вы придёте?</h2>
 
       <p class="rsvp-body">
-        Kindly confirm your attendance by<br/>
-        <strong style="color:var(--text-hi); font-weight: 300;">Friday, 10 April 2026</strong>
+        Пожалуйста, подтвердите своё участие<br/>
+        до <strong style="color:var(--text-hi); font-weight: 300;">7 марта 2026</strong>
       </p>
 
       <!-- ↓ Replace PHONE_NUMBER with the actual WhatsApp number (international format, no +) -->
       <a
         class="btn-rsvp"
-        href="https://wa.me/PHONE_NUMBER?text=Hello%21%20I%27d%20love%20to%20attend%20Rumi%27s%2018th%20Gala%20%F0%9F%A5%82%20Please%20count%20me%20in%21"
+        href="https://wa.me/+77080071805?text=%D0%9F%D1%80%D0%B8%D0%B2%D0%B5%D1%82%21%20%D0%AF%20%D0%B1%D1%83%D0%B4%D1%83%20%D0%BD%D0%B0%20%D0%B4%D0%BD%D0%B5%20%D1%80%D0%BE%D0%B6%D0%B4%D0%B5%D0%BD%D0%B8%D1%8F%20%D0%A0%D1%83%D0%BC%D0%B8%20%F0%9F%8E%89"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="RSVP via WhatsApp"
+        aria-label="Подтвердить через WhatsApp"
       >
         <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
         </svg>
-        RSVP via WhatsApp
+        Подтвердить через WhatsApp
       </a>
 
-      <p class="rsvp-footer">© 2026 · 18th Gala · All rights reserved</p>
+      <p class="rsvp-footer">© 2026 · Руми Gala · Все права защищены</p>
     </section>
 
   </main>
@@ -1101,8 +1209,8 @@
     <div class="sheet-handle" aria-hidden="true"></div>
 
     <div class="sheet-header">
-      <h2 class="sheet-title" id="sheet-title">Dress Code</h2>
-      <button class="sheet-close" id="sheet-close" aria-label="Close dress code">
+      <h2 class="sheet-title" id="sheet-title">Дресс-код</h2>
+      <button class="sheet-close" id="sheet-close" aria-label="Закрыть">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
           <line x1="18" y1="6" x2="6" y2="18"/>
           <line x1="6" y1="6" x2="18" y2="18"/>
@@ -1115,40 +1223,40 @@
     <div class="sheet-body">
 
       <p class="sheet-note">
-        This is a formal black-tie event.<br/>
-        We kindly ask all guests to honour the dress code<br/>
-        to maintain the elegance of the evening.
+        Это праздничное мероприятие.<br/>
+        Просим всех гостей соблюдать дресс-код,<br/>
+        чтобы сохранить атмосферу вечера.
       </p>
 
       <div class="dc-block">
-        <p class="dc-category">Gentlemen</p>
-        <p class="dc-title">Black Tie</p>
+        <p class="dc-category">Девушки</p>
+        <p class="dc-title">Вечерний наряд</p>
         <ul class="dc-items">
-          <li>Black or midnight-blue tuxedo</li>
-          <li>White dress shirt with black bow tie</li>
-          <li>Dark formal trousers &amp; patent leather shoes</li>
-          <li>Optional: pocket square in white or ivory</li>
+          <li>Вечернее или коктейльное платье</li>
+          <li>Туфли на каблуке или элегантная обувь</li>
+          <li>Клатч или небольшая сумочка</li>
+          <li>Украшения приветствуются</li>
         </ul>
       </div>
 
       <div class="dc-block">
-        <p class="dc-category">Ladies</p>
-        <p class="dc-title">Formal Evening Wear</p>
+        <p class="dc-category">Парни</p>
+        <p class="dc-title">Классический стиль</p>
         <ul class="dc-items">
-          <li>Full-length evening gown or elegant cocktail dress</li>
-          <li>Heels, elegant flats, or formal sandals</li>
-          <li>Clutch or small formal bag</li>
-          <li>Statement jewellery welcome</li>
+          <li>Классический костюм или смокинг</li>
+          <li>Рубашка и галстук или бабочка</li>
+          <li>Классические туфли</li>
+          <li>Нагрудный платок — опционально</li>
         </ul>
       </div>
 
       <div class="dc-block">
-        <p class="dc-category">Colour Palette</p>
-        <p class="dc-title">Refined &amp; Dark Tones</p>
+        <p class="dc-category">Цветовая палитра</p>
+        <p class="dc-title">Сдержанные тона</p>
         <ul class="dc-items">
-          <li>Black, charcoal, midnight blue, deep burgundy</li>
-          <li>Ivory &amp; champagne for ladies</li>
-          <li>Avoid: bright casual colours, sportswear, denim</li>
+          <li>Чёрный, графит, тёмно-синий, бордовый</li>
+          <li>Слоновая кость и шампанское — для девушек</li>
+          <li>Избегать: яркие спортивные цвета, джинсы</li>
         </ul>
       </div>
 
@@ -1158,7 +1266,7 @@
           <line x1="12" y1="8" x2="12" y2="12"/>
           <line x1="12" y1="16" x2="12.01" y2="16"/>
         </svg>
-        <span>Guests not meeting the dress code may be kindly redirected</span>
+        <span>Гостей без соответствующего дресс-кода могут вежливо попросить переодеться</span>
       </div>
 
     </div>
@@ -1380,6 +1488,13 @@
         '.rsvp-footer',
         { opacity: 0 },
         { opacity: 1, duration: 0.8, ease: 'power2.out' }
+      );
+
+      revealOnScroll(
+        '.guest-item',
+        { opacity: 0, y: 18 },
+        { opacity: 1, y: 0, duration: 0.65, ease: 'power3.out' },
+        0.07
       );
 
       revealOnScroll(
