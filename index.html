@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>День рождения Руми — Приглашение</title>
+  <title>День рождения Румисы</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='80'>🤍</text></svg>" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Playfair+Display:ital,wght@0,300;0,400;1,300&family=Raleway:wght@200;300;400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Playfair+Display:ital,wght@0,300;0,400;1,300&family=Raleway:wght@200;300;400;600&display=swap" rel="stylesheet" />
 
   <!-- GSAP CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
@@ -935,15 +935,17 @@
     }
 
     /* ─────────────────────────────────────────────
-       GUEST LIST SECTION
+       PERSONAL MESSAGE SECTION
     ───────────────────────────────────────────── */
-    .section-guests {
+    .section-personal {
+      display: none; /* JS sets to flex when ?name= is present */
       background: var(--surface);
       text-align: center;
       gap: 0;
+      position: relative;
     }
 
-    .section-guests::before {
+    .section-personal::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0;
@@ -951,61 +953,65 @@
       background: linear-gradient(90deg, transparent, var(--border), transparent);
     }
 
-    .guests-grid {
-      width: 100%;
-      max-width: 400px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-    }
-
-    .guest-item {
+    .personal-card {
       display: flex;
-      align-items: baseline;
-      gap: 0.85rem;
-      padding: 1rem 0.5rem;
-      border-bottom: 1px solid var(--border);
-      opacity: 0;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.6rem;
+      max-width: 520px;
+      width: 100%;
+      padding: 0 1.5rem;
     }
 
-    /* remove bottom border from last two items */
-    .guest-item:nth-last-child(-n+2) {
-      border-bottom: none;
-    }
-
-    /* subtle right separator between columns */
-    .guest-item:nth-child(odd) {
-      border-right: 1px solid var(--border);
-      padding-right: 1.5rem;
-      justify-content: flex-end;
-    }
-
-    .guest-item:nth-child(even) {
-      padding-left: 1.5rem;
-    }
-
-    .guest-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      font-size: 0.6rem;
-      letter-spacing: 0.15em;
+    .personal-name-display {
+      font-family: 'Caveat', cursive;
+      font-weight: 700;
+      font-size: clamp(4.5rem, 22vw, 8rem);
       color: var(--red);
-      flex-shrink: 0;
+      line-height: 1;
+      letter-spacing: -0.01em;
+      opacity: 0; /* GSAP animates */
     }
 
-    .guest-name {
+    .personal-msg {
       font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
       font-weight: 300;
-      font-size: clamp(1.05rem, 3.5vw, 1.3rem);
-      color: var(--text-hi);
-      letter-spacing: 0.04em;
+      font-size: clamp(1rem, 3.8vw, 1.3rem);
+      color: var(--text-mid);
+      line-height: 1.75;
+      letter-spacing: 0.03em;
+      max-width: 380px;
+      opacity: 0; /* GSAP animates */
     }
 
-    @media (min-width: 560px) {
-      .guests-grid { max-width: 460px; }
-      .guest-item { padding: 1.1rem 0.5rem; }
-      .guest-item:nth-child(odd)  { padding-right: 2rem; }
-      .guest-item:nth-child(even) { padding-left: 2rem; }
+    .personal-ornament {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.4em;
+      color: var(--text-lo);
+      opacity: 0; /* GSAP animates */
+    }
+
+    /* ─────────────────────────────────────────────
+       PERSONALISED GREETING
+    ───────────────────────────────────────────── */
+    .personal-greeting {
+      display: none; /* shown only when ?name= is present */
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(0.95rem, 3.2vw, 1.15rem);
+      letter-spacing: 0.06em;
+      color: var(--text-mid);
+      margin-top: 1.4rem;
+      text-align: center;
+      opacity: 0; /* GSAP animates this in */
+    }
+
+    @keyframes pulse-heart {
+      0%, 100% { opacity: 0.4; transform: scale(1); }
+      50%       { opacity: 1;   transform: scale(1.4); }
     }
 
     :focus-visible {
@@ -1076,13 +1082,16 @@
       <p class="hero-eyebrow">Особенный вечер</p>
 
       <h1 class="hero-title">
-        Руми
+        Румиса
         <em>Gala</em>
       </h1>
 
       <p class="hero-host">
-        В честь дня рождения <strong>Руми</strong>
+        В честь дня рождения <strong>Румисы</strong>
       </p>
+
+      <!-- Filled by JS when ?name= param is present -->
+      <p class="personal-greeting" id="personal-greeting" aria-live="polite"></p>
 
       <div class="hero-divider"></div>
     </section>
@@ -1144,22 +1153,34 @@
 
     </section>
 
-    <!-- ── GUESTS ── -->
-    <section class="section section-guests">
-      <div class="section-rule" aria-hidden="true"></div>
-      <p class="section-tag">Список гостей</p>
+    <!--
+      ══════════════════════════════════════════════════════════════════
+      ИНДИВИДУАЛЬНЫЕ ССЫЛКИ ДЛЯ ГОСТЕЙ (skkvre.vercel.app)
+      ──────────────────────────────────────────────────────────────────
+      Аружан  → https://skkvre.vercel.app/?name=Аружан
+      Нурай   → https://skkvre.vercel.app/?name=Нурай
+      Ерасыл  → https://skkvre.vercel.app/?name=Ерасыл
+      Амина   → https://skkvre.vercel.app/?name=Амина
+      Мирас   → https://skkvre.vercel.app/?name=Мирас
+      Камила  → https://skkvre.vercel.app/?name=Камила
+      Сабина  → https://skkvre.vercel.app/?name=Сабина
+      Ануар   → https://skkvre.vercel.app/?name=Ануар
+      Жаннур  → https://skkvre.vercel.app/?name=Жаннур
+      Балым   → https://skkvre.vercel.app/?name=Балым
 
-      <div class="guests-grid">
-        <div class="guest-item"><span class="guest-num">01</span><span class="guest-name">Аружан</span></div>
-        <div class="guest-item"><span class="guest-num">02</span><span class="guest-name">Нурай</span></div>
-        <div class="guest-item"><span class="guest-num">03</span><span class="guest-name">Ерасыл</span></div>
-        <div class="guest-item"><span class="guest-num">04</span><span class="guest-name">Амина</span></div>
-        <div class="guest-item"><span class="guest-num">05</span><span class="guest-name">Мирас</span></div>
-        <div class="guest-item"><span class="guest-num">06</span><span class="guest-name">Камила</span></div>
-        <div class="guest-item"><span class="guest-num">07</span><span class="guest-name">Сабина</span></div>
-        <div class="guest-item"><span class="guest-num">08</span><span class="guest-name">Ануар</span></div>
-        <div class="guest-item"><span class="guest-num">09</span><span class="guest-name">Жаннур</span></div>
-        <div class="guest-item"><span class="guest-num">10</span><span class="guest-name">Балым</span></div>
+      Все ссылки разом → https://skkvre.vercel.app/?showlinks=1
+      ══════════════════════════════════════════════════════════════════
+    -->
+
+    <!-- ── PERSONAL MESSAGE (shown only when ?name= is present) ── -->
+    <section class="section section-personal" id="section-personal" aria-live="polite">
+      <div class="section-rule" aria-hidden="true"></div>
+      <p class="section-tag">Только для тебя</p>
+
+      <div class="personal-card">
+        <span class="personal-name-display" id="personal-name-display"></span>
+        <p class="personal-msg" id="personal-msg"></p>
+        <div class="personal-ornament" aria-hidden="true">— ♥ —</div>
       </div>
     </section>
 
@@ -1189,7 +1210,6 @@
         Подтвердить через WhatsApp
       </a>
 
-      <p class="rsvp-footer">© 2026 · Руми Gala · Все права защищены</p>
     </section>
 
   </main>
@@ -1279,6 +1299,9 @@
   <script>
     window.addEventListener('DOMContentLoaded', () => {
 
+      /* ── Personalise from ?name= URL param (runs before GSAP) ── */
+      initGuestPersonalization();
+
       /* ── guard: wait for GSAP ── */
       const waitForGSAP = (cb) => {
         if (typeof gsap !== 'undefined') cb();
@@ -1287,6 +1310,98 @@
 
       waitForGSAP(init);
     });
+
+    /* ── 0. URL Personalisation ── */
+    function initGuestPersonalization() {
+      const params = new URLSearchParams(window.location.search);
+
+      /* Dev helper — open ?showlinks=1 to see all personal URLs */
+      if (params.get('showlinks') === '1') { showAllLinks(); return; }
+
+      const rawName = params.get('name');
+      if (!rawName) return;
+
+      /* Capitalise first letter, trim whitespace */
+      const name = rawName.trim().charAt(0).toUpperCase() + rawName.trim().slice(1);
+
+      /*
+       * Unique personal messages per guest.
+       * Keys are lowercase for case-insensitive matching.
+       */
+      const messages = {
+        'аружан': 'Ты — первая, кто приходит на ум, когда речь идёт о настоящей дружбе. Этот вечер будет неполным без тебя.',
+        'нурай':  'Твоя улыбка освещает любую комнату. Приходи — и звёзды этой ночи засияют ещё ярче.',
+        'ерасыл': 'О дорогой Ерасыл наш физмат этот праздник не будет полон без тебя. Смех который ты приносишь делает каждый праздник живым. Буду ждать тебя РаСен',
+        'амина':  'Тёплый человек в тёплый вечер — именно такое сочетание делает праздник волшебным.',
+        'мирас':  'Твоё присутствие создаёт особую атмосферу. Приходи и подари нам её снова.',
+        'камила': 'Изящество и свет — это ты. Зал Grammy будет рад твоему появлению.',
+        'сабина': 'Твоя энергия заражает всех вокруг радостью. Без тебя этот вечер был бы другим.',
+        'ануар':  'Ты умеешь делать моменты незабываемыми. Время создать ещё один — вместе.',
+        'жаннур': 'Нежность и искренность — твои главные украшения. Ждём тебя на этом вечере.',
+        'балым':  'Ты — особенная. И этот особенный вечер создан именно для таких, как ты.'
+      };
+
+      const key = rawName.trim().toLowerCase();
+      const msg = messages[key] || `Этот вечер будет особенным — особенно с тобой, ${name}.`;
+
+      /* 1. Small greeting in hero */
+      const greeting = document.getElementById('personal-greeting');
+      if (greeting) {
+        greeting.textContent = `Дорогой(-ая) ${name}, ждём тебя ♥`;
+        greeting.style.display = 'block';
+      }
+
+      /* 2. Show & populate the personal message section */
+      const section  = document.getElementById('section-personal');
+      const nameEl   = document.getElementById('personal-name-display');
+      const msgEl    = document.getElementById('personal-msg');
+
+      if (section && nameEl && msgEl) {
+        section.style.display = 'flex';
+        nameEl.textContent = name;
+        msgEl.textContent  = msg;
+      }
+
+      /* 3. Personalise the WhatsApp RSVP message */
+      const btnRsvp = document.querySelector('.btn-rsvp');
+      if (btnRsvp) {
+        const waMsg = encodeURIComponent(
+          `Привет! Это ${name}. Я буду на дне рождения Румисы 🎉`
+        );
+        btnRsvp.href = `https://wa.me/+77080071805?text=${waMsg}`;
+      }
+    }
+
+    /* Opens a dev overlay listing every guest’s personal URL */
+    function showAllLinks() {
+      const guests = ['\u0410\u0440\u0443\u0436\u0430\u043d','\u041d\u0443\u0440\u0430\u0439','\u0415\u0440\u0430\u0441\u044b\u043b','\u0410\u043c\u0438\u043d\u0430','\u041c\u0438\u0440\u0430\u0441','\u041a\u0430\u043c\u0438\u043b\u0430','\u0421\u0430\u0431\u0438\u043d\u0430','\u0410\u043d\u0443\u0430\u0440','\u0416\u0430\u043d\u043d\u0443\u0440','\u0411\u0430\u043b\u044b\u043c'];
+      const base   = window.location.origin + window.location.pathname;
+      const panel  = document.createElement('div');
+      panel.style.cssText = [
+        'position:fixed;inset:0;background:rgba(249,249,249,0.97)',
+        'backdrop-filter:blur(12px);z-index:9000',
+        'display:flex;flex-direction:column;align-items:center',
+        'justify-content:center;gap:0.6rem;padding:2rem;overflow-y:auto'
+      ].join(';');
+      panel.innerHTML = `
+        <p style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;letter-spacing:.1em;color:#2D2D2D;margin-bottom:.8rem">Индивидуальные ссылки</p>
+        ${guests.map(g => `
+          <div style="display:flex;align-items:center;gap:1rem;width:min(480px,90vw)">
+            <span style="font-family:'Cormorant Garamond',serif;font-size:1rem;color:#2D2D2D;width:75px">${g}</span>
+            <input readonly
+              value="${base}?name=${encodeURIComponent(g)}"
+              onclick="this.select()"
+              style="flex:1;background:#F2EDE5;border:1px solid rgba(0,0,0,.1);padding:.45rem .7rem;
+                     font-family:monospace;font-size:.7rem;color:#2D2D2D;border-radius:3px;cursor:pointer"
+            />
+          </div>`).join('')}
+        <button onclick="this.closest('div[style]').remove()"
+          style="margin-top:1.2rem;padding:.6rem 1.6rem;background:#800020;color:#fff;
+                 border:none;font-family:'Cormorant Garamond',serif;font-size:.8rem;
+                 letter-spacing:.25em;cursor:pointer;border-radius:2px">Закрыть</button>
+      `;
+      document.body.appendChild(panel);
+    }
 
     function init() {
       const scene          = document.getElementById('scene');
@@ -1419,6 +1534,13 @@
           { opacity: 1, y: 0, duration: 0.8 }, '-=0.6')
         .fromTo('.hero-divider',{ opacity: 0, scaleX: 0 },
           { opacity: 1, scaleX: 1, duration: 0.7, transformOrigin: 'left' }, '-=0.4')
+        .add(() => {
+          /* only animate greeting if it's visible (name param present) */
+          const gr = document.getElementById('personal-greeting');
+          if (gr && gr.style.display !== 'none') {
+            gsap.fromTo(gr, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.85, ease: 'power3.out' });
+          }
+        }, '-=0.3')
         .fromTo('.corner',     { opacity: 0, scale: 0.6 },
           { opacity: 0.25, scale: 1, duration: 0.5, stagger: 0.08 }, '-=0.5');
 
@@ -1492,10 +1614,21 @@
       );
 
       revealOnScroll(
-        '.guest-item',
-        { opacity: 0, y: 18 },
-        { opacity: 1, y: 0, duration: 0.65, ease: 'power3.out' },
-        0.07
+        '.personal-name-display',
+        { opacity: 0, y: 40, scale: 0.9 },
+        { opacity: 1, y: 0, scale: 1, duration: 1.0, ease: 'power3.out' }
+      );
+
+      revealOnScroll(
+        '.personal-msg',
+        { opacity: 0, y: 22 },
+        { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' }
+      );
+
+      revealOnScroll(
+        '.personal-ornament',
+        { opacity: 0 },
+        { opacity: 1, duration: 0.8, ease: 'power2.out' }
       );
 
       revealOnScroll(
